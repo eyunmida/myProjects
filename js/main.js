@@ -38,6 +38,7 @@ window.onload = function(){
 
 citySelected.onchange = function(){
 
+  alert(citySelected.value);
   $("#load").show();
   result.innerHTML='';
   var temp, tempLat, tempLong;
