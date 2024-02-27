@@ -38,7 +38,6 @@ window.onload = function(){
 
 citySelected.onchange = function(){
 
-  alert(citySelected.value);
   $("#load").show();
   result.innerHTML='';
   var temp, tempLat, tempLong;
@@ -53,7 +52,6 @@ citySelected.onchange = function(){
 
  
 const getWeather = (lat, lon) => {
-  alert("test!");
   fetch(
     `http://www.7timer.info/bin/api.pl?lon=${lon}&lat=${lat}&product=civillight&output=json`
   )
@@ -70,6 +68,7 @@ const getWeather = (lat, lon) => {
       $("#load").hide();
       result.innerHTML = realtimeResults+'</tr></table>'; //화면에 출력   
     });
+    alert("jason안돌아감");
 }
 
 function getDayOfWeek(yyyyMMdd){
