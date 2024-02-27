@@ -67,6 +67,8 @@ const getWeather = (lat, lon) => {
         });
       $("#load").hide();
       result.innerHTML = realtimeResults+'</tr></table>'; //화면에 출력   
+    }).catch((error) => {
+      alert(error);
     });
     alert("jason안돌아감");
 }
