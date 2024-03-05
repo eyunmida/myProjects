@@ -53,8 +53,9 @@ citySelected.onchange = function(){
  
 const getWeather = (lat, lon) => {
   fetch(
-    `http://www.7timer.info/bin/api.pl?lon=${lon}&lat=${lat}&product=civillight&output=json`
-  )
+    `http://www.7timer.info/bin/api.pl?lon=${lon}&lat=${lat}&product=civillight&output=json`,{
+      method: 'GET', headers: {'Content-type':'appliction/json'}
+    })
   .then((response) => response.json())
   .then((json) => {
       let realtimeResults = '<p> This is 7 Days Weather!</p><table name="weeklyDatya" id="weeklyData"><tr>';
