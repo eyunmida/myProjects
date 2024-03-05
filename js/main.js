@@ -21,13 +21,13 @@ window.onload = function(){
       {
         //<option value='{"lat":"52.367","lon":"4.904"}'>Amsterdam, Netherlands</option>
         if(cell_count==0)
-          option_data += '<option value=\'{"lat":"'+cell_data[cell_count];
+          option_data += '<option value="lat:'+cell_data[cell_count];
         if(cell_count==1)
-          option_data += '","lon":"'+cell_data[cell_count]+'"}\'>';
+          option_data += ',lon:'+cell_data[cell_count]+'">';
         if(cell_count==2)
-          option_data += cell_data[cell_count]+', '
+          option_data += cell_data[cell_count]+', ';
         if(cell_count==3)
-          option_data += cell_data[cell_count]+'</option>'
+          option_data += cell_data[cell_count]+'</option>';
       }
      }
     }
@@ -41,20 +41,20 @@ citySelected.onchange = function(){
   $("#load").show();
   result.innerHTML='';
   var temp, tempLat, tempLong;
-  temp = citySelected.value.replace(/"/g,'').replace('{','').replace('}','').split(',');
+  temp = citySelected.value.split(',');
   tempLat = temp[0].split(':');
   tempLong = temp[1].split(':');
   const latitude = tempLat[1];
   const longitude = tempLong[1];
 
   getWeather(latitude, longitude);
-};
+}
 
  
 const getWeather = (lat, lon) => {
   fetch(
     `http://www.7timer.info/bin/api.pl?lon=${lon}&lat=${lat}&product=civillight&output=json`,{
-      method: 'GET', headers: {'Content-type':'appliction/json'}
+      method: 'GET', headers: {'Content-type':'text/plain'}
     })
   .then((response) => response.json())
   .then((json) => {
