@@ -52,9 +52,8 @@ citySelected.onchange = function(){
 
  
 const getWeather = (lat, lon) => {
-  fetch(
-    `http://www.7timer.info/bin/api.pl?lon=${lon}&lat=${lat}&product=civillight&output=json`,{
-      method: 'GET', headers: {'Content-type':'text/plain'}
+  fetch(`http://www.7timer.info/bin/api.pl?lon=${lon}&lat=${lat}&product=civillight&output=json`,{
+      method: 'GET', headers: {'Content-type':'application/json'}
     })
   .then((response) => response.json())
   .then((json) => {
@@ -69,7 +68,7 @@ const getWeather = (lat, lon) => {
       $("#load").hide();
       result.innerHTML = realtimeResults+'</tr></table>'; //화면에 출력   
     }).catch((error) => {
-      alert(error.data);
+      alert(error);
       alert("jason안돌아감");
     });
     
