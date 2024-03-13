@@ -82,6 +82,7 @@ const getWeather = (lat, lon) => {
     } else {
       alert(`An error occurred while checking if the repository is starred: ${error?.response?.data?.message}`);
     }
+    $("#load").hide();
   }
   /*
   fetch(`http://www.7timer.info/bin/api.pl?lon=${lon}&lat=${lat}&product=civillight&output=json`,{
