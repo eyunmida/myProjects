@@ -50,8 +50,40 @@ citySelected.onchange = function(){
   getWeather(latitude, longitude);
 }
 
- 
+
+import { Octokit } from "octokit";
+
+const octokit = new Octokit({ });
+
 const getWeather = (lat, lon) => {
+  try {
+    const data = await octokit.paginate("GET http://www.7timer.info/bin/api.pl?lon=${lon}&lat=${lat}&product=civillight&output=json", {
+    owner: "github",
+    repo: "docs",
+    per_page: 100,
+    headers: {
+      "x-github-api-version": "2022-11-28",
+    },
+  });
+  let realtimeResults = '<p> This is 7 Days Weather!</p><table name="weeklyDatya" id="weeklyData"><tr>';
+        data.dataseries.forEach(element => { //foreach 배열의 개수만큼 반복문을 돌려라
+          console.log(element)//element에는 하나 하나의 배열이 담아져 있음
+          realtimeResults+=`<td><table name="dailyData" id="dailyData"><tr><th>${getDayOfWeek(element.date)}</th></tr>
+            <tr><td><img src="./images/${element.weather}.png" /></td></tr>
+            <tr><td>H : ${element.temp2m.max}ºF / ${Math.round((element.temp2m.max-32)*5/9)}ºC</td></tr>
+            <tr><td>L : ${element.temp2m.min}ºF / ${Math.round((element.temp2m.min-32)*5/9)}ºC</td></tr></table></td>`
+          });
+        $("#load").hide();
+        result.innerHTML = realtimeResults+'</tr></table>'; //화면에 출력   
+
+  } catch (error) {
+    if (error.status === 404) {
+      console.log(`The repository is not starred by me`);
+    } else {
+      console.error(`An error occurred while checking if the repository is starred: ${error?.response?.data?.message}`);
+    }
+  }
+  /*
   fetch(`http://www.7timer.info/bin/api.pl?lon=${lon}&lat=${lat}&product=civillight&output=json`,{
       method: 'GET', headers: {'Content-type':'application/json'}
     })
@@ -70,7 +102,7 @@ const getWeather = (lat, lon) => {
     }).catch((error) => {
       alert(error);
       alert("jason안돌아감");
-    });
+    });*/
     
 }
 
