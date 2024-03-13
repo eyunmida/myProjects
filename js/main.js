@@ -78,9 +78,9 @@ const getWeather = (lat, lon) => {
 
   } catch (error) {
     if (error.status === 404) {
-      console.log(`The repository is not starred by me`);
+      alert(`The repository is not starred by me`);
     } else {
-      console.error(`An error occurred while checking if the repository is starred: ${error?.response?.data?.message}`);
+      alert(`An error occurred while checking if the repository is starred: ${error?.response?.data?.message}`);
     }
   }
   /*
